@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //**** one
+    // var mult =ca=function(){
+    //     var cache={};
+    //     var caculate=function () {
+    //         var sum=1;
+    //         for(var i=0,len=arguments.length;i<len;i++){
+    //             sum*=arguments[i];
+    //         }
+    //         return sum;
+    //     }
+    //     return function () {
+    //         var args=Array.prototype.join.call(arguments,",");
+    //         if(args in cache){
+    //             return cache[args];
+    //         }
+    //         return cache[args]=caculate.apply(null,arguments);
+    //     }
+    // }();
+    // console.log(mult(1,2,3,4));
+    //  mult=null;
+    //  mult=ca;
+    // console.log(mult(1,2,3,4));
+    // console.log(mult(1,2,3,4,5));
+    //*****
+
+    //**** two
+    // var getSingle=(function () {
+    //     var ret;
+    //     var create=function () {
+    //         return document.createElement("script");
+    //     };
+    //     return function () {
+    //         console.log(this);
+    //         return ret||(ret=create());//条件运算，第一个条件undefined 等价于false，第二个条件生成对象，对象等价于true，并把对象返回
+    //     }
+    // })();
+    //
+    // var script1=getSingle();
+    // var script2=getSingle();
+    // console.log(script1===script2);
+    //******
+
+    //**** three
+    // var curring = function (fn) {
+    //     var args = [];
+    //     return function () {
+    //         if (arguments.length === 0) {
+    //             // return fn(args);
+    //             return fn.apply(null,args);//fn(args);此处等价于执行函数fn，并把数组传递给fn，
+    //                                         // 但是为什么不用call，因为call的只能传递单个参数，但是apply可以传递数组
+    //         }else{
+    //             [].push.apply(args,arguments);
+    //         }
+    //     }
+    // }
+    // var cost=function () {
+    //     var money=0;
+    //     for(var i=0,len=arguments.length;i<len;i++){
+    //         money+=arguments[i];
+    //     }
+    //     return money;
+    // }
+    // var a=curring(cost);
+    //
+    // console.log(cost(100,200,33));
+    // a(100);
+    // a(200);
+    // a(300);
+    // console.log(a());
+    // console.log(cost(300));
+    //*****
+
+    //**** four
+    // console.log(function () {
+    //     var a = {name: "hh", age: 12};
+    //     Array.prototype.push.apply(a, arguments);
+    //     return a;
+    // }([1, 2, 3]));
+    //*****
+
+    //**** five
+    // Function.prototype.uncurring=function () {
+    //     var self=this;
+    //     console.log(this);
+    //     console.log(self);
+    //     return function(){
+    //         var obj=Array.prototype.shift.call(arguments);//分离两个参数获取第一个参数对象。
+    //         // console.log(obj);
+    //         // console.log(arguments);
+    //         return self.apply(obj,arguments);//调用数组的push方法，将第二个参数添加到第一个对象中
+    //     }
+    // }
+    // Function.prototype.uncurring=function () {
+    //     var self=this;// 先保存引用 Array.prototype.push
+    //     return function(){
+    //
+    //         return Function.prototype.call.apply(self,arguments);
+    //         //Function.prototype ===> self   arguments=[obj,4] ====> (obj,4)
+    //         //self.call(obj,4)
+    //     }
+    // }
+    // var push =Array.prototype.push.uncurring();
+    // (function () {
+    //     push(arguments,4);//第一个是对象，需要将第二个参数加入到第一个对象中，但是参数对于不同的方法是不一致的
+    //     console.log(arguments);
+    // })(1,2,3)
+    //*****
+
+    //**** six
+    //---------1--------
+    // var Data =function () {
+    //     this.price=0;
+    //     this.type="88";
+    //     function Data(price,type) {
+    //         this.price=price;
+    //         this.type=type;
+    //     }
+    //     return Data;
+    // }(); //协议
+    // var Publisher = {
+    //     sublist: [],
+    //     listen: function (subscriber) {
+    //         var type = subscriber.type;
+    //         var list, lists = this.sublist;
+    //         for (var index in lists) {
+    //             if (lists[index].type === type) {
+    //                 list = lists[index];
+    //                 break;
+    //             }
+    //         }
+    //         ;
+    //         if (!list) {
+    //             list = {type: type};
+    //             lists.push(list);
+    //         }
+    //         Array.prototype.push.call(list, subscriber);
+    //         console.log("客户： " + subscriber.ID + " 已订阅房型： " + subscriber.type);
+    //     },
+    //     publish: function (data) {
+    //         console.log("有新房型信息，开始告知相关订阅用户");
+    //         this.sublist.forEach(function (eles) {
+    //             if (data.type === eles.type) {
+    //                 Array.prototype.forEach.call(eles,(function (ele) {
+    //                     ele.work(data);
+    //                 }))
+    //             }
+    //         });
+    //         console.log("房型信息已发布");
+    //     }
+    // };//发布方
+    //
+    // var Subscriber = (function () {
+    //     function Subscriber(ID, type) {
+    //         this.ID = ID;
+    //         this.type = type;
+    //     }
+    //     Subscriber.prototype.work = function (data) {
+    //         console.log(this.ID + " 接收房型信息,房价： " + data.price + " 房型： " + data.type);
+    //     }
+    //     return Subscriber;
+    // })();//订阅方
+    //
+    // var a = new Subscriber(11, "88");
+    // var b = new Subscriber(22, "88");
+    // var c = new Subscriber(33, "120");
+    // Publisher.listen(a);
+    // Publisher.listen(b);
+    // Publisher.listen(c);
+    // var d1=new Data(2000,"88");
+    //
+    // Publisher.publish(d1);
+
+    //------2-------
+    var Publisher = function () {
+        var lists;
+        var remove_Arr = function (array, obj) {
+            if (!array){
+                return;
+            }
+            var index = array.indexOf(obj);
+            if (index !== -1){
+                array.splice(index, 1);
+            }
+        };
+        var coustom_ = function (type, fn, fn2) {
+            if (!lists) {
+                lists = [];
+            }
+            if (!lists[type]) {
+                if (fn)
+                    fn();
+            } else {
+                if (fn2) {
+                    fn2();
+                }
+            }
+        }
+        var instance;
+        return !instance ? instance = {
+            listen: function () {
+                // console.log(arguments);
+                Array.prototype.forEach.call(arguments, function (ele) {
+                    coustom_(ele.type, function () {
+                        lists[ele.type] = [];
+                        lists[ele.type].push(ele);
+                    }, function () {
+                        lists[ele.type].push(ele);
+                    })
+                })
+            },
+            publish: function () {
+                Array.prototype.forEach.call(arguments, function (ele) {
+                    coustom_(ele.type, null, function () {
+                        lists[ele.type].forEach(function (sub) {
+                            sub.work(ele);
+                        });
+                    });
+                })
+            },
+            remove: function () {
+                Array.prototype.forEach.call(arguments, function (ele) {
+                        coustom_(ele.type, remove_Arr(lists[ele.type],ele));
+                    }
+                )
+            }
+        } : instance;
+    }
+    var Data = function () {
+        function Data(type, price) {
+            this.type = type;
+            this.price = price;
+        }
+
+        Data.prototype.toString = function () {
+            return "Data: type " + this.type + " price " + this.price;
+        }
+        return Data;
+    }();
+    var Subscriber = function () {
+        function Subscriber(ID, type) {
+            this.ID = ID;
+            this.type = type;
+        }
+        Subscriber.prototype.toString=function(){
+            return "ID : " + this.ID + " type: " + this.type ;
+        }
+
+        Subscriber.prototype.work = function (data) {
+            console.log(this+" receive " + data)
+        }
+        return Subscriber;
+    }();
+    var p = Publisher();
+    var d = new Data(88, 20000);
+    var d2 = new Data(120, 40000);
+    var s1 = new Subscriber("xx", 88);
+    var s2 = new Subscriber("yy", 88);
+    var s3 = new Subscriber("mm", 120);
+    p.listen(s1, s2, s3);
+    p.publish(d);
+    p.remove(s2);
+    console.log("-----------")
+    p.publish(d);
+    //------3-------
+
+    //*****
+</script>
+</body>
+</html>
