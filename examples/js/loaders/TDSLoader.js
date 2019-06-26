@@ -910,7 +910,7 @@ THREE.TDSLoader.prototype = {
 	 * Is controlled by a flag to show or hide debug messages.
 	 *
 	 * @method debugMessage
-	 * @param {Object} message Debug message to print to the console.
+	 * @param {Object} message Debug message to print-c to the console.
 	 */
 	debugMessage: function ( message ) {
 

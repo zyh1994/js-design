@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>test three group size</title>
+  <script src="../../build/three.js"></script>
+  <!--<link rel="stylesheet" href="qunit/qunit-2.7.1.css">-->
+  <script src="../../examples/js/loaders/MTLLoader.js"></script>
+  <script src="../../examples/js/loaders/LoaderSupport.js"></script>
+  <script src="../../examples/js/loaders/OBJLoader2.js"></script>
+</head>
+<body>
+  <!--<div id="qunit"></div>-->
+  <!--<div id="qunit-fixture"></div>-->
+  <!--<script src="qunit/qunit-2.7.1.js"></script>-->
+  <script >
+      'use strict';
+      function getModel() {
+          var modelName = 'table';
+          var objLoader = new THREE.OBJLoader2();
+          var callbackOnLoad = function (event) {
+          };
+          var onLoadMtl = function (materials) {
+              objLoader.setModelName(modelName);
+              objLoader.setMaterials(materials);
+              objLoader.setLogging(true, true);
+              objLoader.load('../../examples/models/obj/test/table.obj', callbackOnLoad, null, null, null, false);
+          };
+          objLoader.loadMtl('../../examples/models/obj/test/table.mtl', null, onLoadMtl);
+          var tableModel=objLoader.loaderRootNode;
+          tableModel.rotation.x=Math.PI/2;
+          console.log(tableModel);
+          return tableModel;
+      }
+      function tableGroup(tableModel,rowNum,columnNum,layer) {
+
+      }
+      var model=getModel();
+      var geometry=new THREE.Group();
+      console.log(geometry);
+      // QUnit.test("getmodel",function (assert){
+      //     assert.ok(getModel(),"Passed!");
+      // });
+  </script>
+
+</body>
+</html>

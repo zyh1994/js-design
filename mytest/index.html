@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>three.js webgl - OBJLoader2 basic usage</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <style>
+        body {
+            font-family: Monospace;
+            background-color: #000;
+            color: #fff;
+            margin: 0 0 0 0;
+            padding: 0 0 0 0;
+            border: none;
+            cursor: default;
+        }
+
+        #glFullscreen {
+            width: 100%;
+            height: 100vh;
+            min-width: 640px;
+            min-height: 360px;
+            position: relative;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        #example {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: #000000;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div id="glFullscreen">
+    <canvas id="example"></canvas>
+</div>
+
+<script src="../examples/js/Detector.js"></script>
+<script src="../build/three.js"></script>
+<script src="../examples/js/controls/TrackballControls.js"></script>
+<script src="../examples/js/loaders/MTLLoader.js"></script>
+<script src="../examples/js/libs/dat.gui.min.js"></script>
+
+<script src="../examples/js/loaders/LoaderSupport.js"></script>
+<script src="../examples/js/loaders/OBJLoader2.js"></script>
+<script src="../test/mytest/walk.js"></script>
+<script src='../examples/js/libs/tween.min.js'></script>
+<script>
+    'use strict';
+    var a=new MyAnimation();
+    console.log(a.getTween());
+
+</script>
+</body>
+</html>

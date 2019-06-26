@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>假条打印</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            background-color: #EAEAEA;
+        }
+
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: #1E90FF;
+        }
+
+        button {
+            width: 100px;
+            height: 20px;
+        }
+
+        table, table tr th, table tr td {
+            border: 0px solid #0094ff;
+        }
+
+        table {
+            min-height: 55px;
+            line-height: 35px;
+            text-align: center;
+            border-collapse: collapse;
+            padding: 2px;
+        }
+
+        .l1 {
+            width: 42vh;
+            /*height: 50px;*/
+        }
+
+        input {
+            width: 8vh;
+            height: 10px;
+            /*border: 0px solid #ccc;*/
+            padding: 7px 0px;
+            border-radius: 3px; /*css3属性IE不支持*/
+            padding-left: 5px;
+        }
+
+    </style>
+    <script src="js/jquery.min.js"></script>
+    <script language="javascript" src="js/jquery.jqprint-0.3.js"></script>
+
+</head>
+
+<body>
+<table id="table" class="l1">
+    <tr>
+        <td>存根编号：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>存根编号：</td>
+        <td>NO.2</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>存根编号：</td>
+        <td>NO.3</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>存根编号：</td>
+        <td>NO.4</td>
+    </tr>
+    <tr>
+        <td>姓名：</td>
+        <td></td>
+        <td>&nbsp;&nbsp;</td>
+        <td>姓名：</td>
+        <td></td>
+        <td>&nbsp;&nbsp;</td>
+        <td>姓名：</td>
+        <td></td>
+        <td>&nbsp;&nbsp;</td>
+        <td>姓名：</td>
+        <td></td>
+
+    </tr>
+    <tr>
+        <td>加班时间：</td>
+        <td></td>
+        <td>&nbsp;&nbsp;</td>
+        <td>加班时间：</td>
+        <td></td>
+        <td>&nbsp;&nbsp;</td>
+        <td>加班时间：</td>
+        <td></td>
+        <td>&nbsp;&nbsp;</td>
+        <td>加班时间：</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>调休天数：</td>
+        <td>半天</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>调休天数：</td>
+        <td>半天</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>调休天数：</td>
+        <td>半天</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>调休天数：</td>
+        <td>半天</td>
+
+    </tr>
+    <tr>
+        <td colspan="2">------------------------</td>
+        <th>&nbsp;&nbsp;</th>
+        <td colspan="2">------------------------</td>
+        <th>&nbsp;&nbsp;</th>
+        <td colspan="2">------------------------</td>
+        <th>&nbsp;&nbsp;</th>
+        <td colspan="2">------------------------</td>
+
+    </tr>
+    <tr>
+        <td>调休单：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>调休单：</td>
+        <td>NO.2</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>调休单：</td>
+        <td>NO.3</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>调休单：</td>
+        <td>NO.4</td>
+
+
+    </tr>
+    <tr>
+        <td>姓名：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>姓名：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>姓名：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>姓名：</td>
+        <td>NO.1</td>
+
+    </tr>
+    <tr>
+        <td>加班事由：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>加班事由：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>加班事由：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>加班事由：</td>
+        <td>NO.1</td>
+    </tr>
+    <tr>
+        <td>加班时间：</td>
+        <td>2018.11.3</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>加班时间：</td>
+        <td>2018.11.3</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>加班时间：</td>
+        <td>2018.11.3</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>加班时间：</td>
+        <td>2018.11.3</td>
+    </tr>
+    <tr>
+        <td>调休天数：</td>
+        <td>半天</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>调休天数：</td>
+        <td>半天</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>调休天数：</td>
+        <td>半天</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>调休天数：</td>
+        <td>半天</td>
+    </tr>
+    <tr>
+        <td>签发人：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>签发人：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>签发人：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>签发人：</td>
+        <td>NO.1</td>
+    </tr>
+    <tr>
+        <td>签发时间：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>签发时间：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>签发时间：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>签发时间：</td>
+        <td>NO.1</td>
+    </tr>
+    <tr>
+        <td colspan="2">------------------------</td>
+        <th>&nbsp;&nbsp;</th>
+        <td colspan="2">------------------------</td>
+        <th>&nbsp;&nbsp;</th>
+        <td colspan="2">------------------------</td>
+        <th>&nbsp;&nbsp;</th>
+        <td colspan="2">------------------------</td>
+    </tr>
+    <tr>
+        <td>调休事由：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>调休事由：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>调休事由：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>调休事由：</td>
+        <td>NO.1</td>
+    </tr>
+    <tr>
+        <td>调休日期：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>调休日期：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>调休日期：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>调休日期：</td>
+        <td>NO.1</td>
+    </tr>
+    <tr>
+        <td>部门意见：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>部门意见：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>部门意见：</td>
+        <td>NO.1</td>
+        <td>&nbsp;&nbsp;</td>
+        <td>部门意见：</td>
+        <td>NO.1</td>
+    </tr>
+    <tr>
+        <td colspan="2">(本调休单自签发之日起六个月内有效)</td>
+        <th>&nbsp;&nbsp;</th>
+        <td colspan="2">(本调休单自签发之日起六个月内有效)</td>
+        <th>&nbsp;&nbsp;</th>
+        <td colspan="2">(本调休单自签发之日起六个月内有效)</td>
+        <th>&nbsp;&nbsp;</th>
+        <td colspan="2">(本调休单自签发之日起六个月内有效)</td>
+    </tr>
+
+</table>
+<table class="l1" >
+    <tr>
+        <td colspan="2"><input style="height: 40px" name="mhidden" type="button" onclick="doPrint()" value="打印"/></td>
+        <td>&nbsp;&nbsp;</td>
+        <td colspan="2"><input style="height: 40px" name="mhidden" type="button" onclick="doSave()" value="保存"/></td>
+    </tr>
+</table>
+<table class="l1" id="table2" hidden="true">
+    <tr>
+        <td colspan="2"><input style="height: 40px" name="mhidden" type="button" onclick="doPrint()" value="打印"/></td>
+        <td>&nbsp;&nbsp;</td>
+        <td colspan="2"><input style="height: 40px" name="mhidden" type="button" onclick="doSave()" value="保存"/></td>
+    </tr>
+</table>
+
+
+<script type="text/javascript">
+    function doPrint() {
+        // $("#table2").show();
+        var table =$("<table></table>");
+        table.attr("id", "printTable");
+        for(var i=0;i<17;i++){
+            var tr=$("<tr></tr>");
+            if(i==3||i==12||i==16){
+                for(var j=0;j<7;j++){
+                    var td=$("<td></td>");
+                    if(j%2==0){
+                        td.attr("colspan",2);
+                        td.text();
+                    }else{
+                        td.text("&nbsp;&nbsp;");
+                    }
+                    tr.append(td);
+                }
+            }
+            else{
+                for(var j=0;j<11;j++){
+                    var td=$("<td></td>");
+                    if(j%2!=0){
+                        td.html("&nbsp;&nbsp;");
+                    }else {
+                        td.text();
+                    }
+                    tr.append(td);
+                }
+            }
+
+            table.append(tr);
+        }
+        table .jqprint();
+        // $("#table2").hide();
+    }
+</script>
+</body>
+</html>
+
+
+
+
+
+

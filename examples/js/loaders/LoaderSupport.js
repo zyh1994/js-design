@@ -50,7 +50,7 @@ THREE.LoaderSupport.Callbacks = (function () {
 	}
 
 	/**
-	 * Register callback function that is invoked by internal function "announceProgress" to print feedback.
+	 * Register callback function that is invoked by internal function "announceProgress" to print-c feedback.
 	 * @memberOf THREE.LoaderSupport.Callbacks
 	 *
 	 * @param {callback} callbackOnProgress Callback function for described functionality

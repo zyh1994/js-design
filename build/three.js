@@ -46259,7 +46259,7 @@
 	exports.CanvasRenderer = CanvasRenderer;
 	exports.SceneUtils = SceneUtils;
 	exports.LensFlare = LensFlare;
-
+	exports.ColorKeywords=ColorKeywords;//新增颜色列表
 	Object.defineProperty(exports, '__esModule', { value: true });
 
 })));

@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html >
+
+<head>
+    <title></title>
+    <link href="css/core.css" rel="stylesheet" type="text/css" />
+    <link href="css/datagrid.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/datagrid.js" type="text/javascript"></script>   
+</head>
+<body>
+
+<input type="button" value="addRow" onclick="addRow()"/>
+<input type="button" value="setColumns" onclick="setColumns()"/>
+
+<div id="grid"></div>
+
+</body>
+</html>
+
+<script>
+
+    $("#grid").datagrid({
+        width: 300,
+        height: 50,
+        columns: [
+            { text: "名称", field: "name", width: 100},
+            { text: "年龄", field: "age" , width: 100},
+            { text: "日期", field: "birthday", width: 100,
+                renderer: function (value, row, col) {
+                    if (value && value.getFullYear) {
+                        value = value.getFullYear() + "-" + (value.getMonth() + 1) + "-" + value.getDate();
+                    }
+                    return value;
+                }
+            }
+        ],
+        data: [
+            { name: "name1", age: 20, birthday: new Date() },
+            { name: "name1", age: 20, birthday: new Date() },
+            { name: "name1", age: 20, birthday: new Date() },
+            { name: "name1", age: 20, birthday: new Date() },
+            { name: "name1", age: 20, birthday: new Date() }
+        ]
+    });
+
+    function addRow() {
+        //$("#grid").datagrid("addRow", { name: "aaa" });
+
+        var grid = $("#grid").data("datagrid");
+        // grid._setIndex();
+        grid.addRow({name:"name"});
+    }
+
+    function setColumns() {
+      
+        var grid = $("#grid").data("datagrid");
+        grid.setColumns([
+            { text: "Name", field: "name", width: 150 },
+            { text: "Age", field: "age", width: 150 }
+        ]);
+    }
+
+   
+</script>

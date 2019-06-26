@@ -2485,7 +2485,7 @@ THREE.SEA3D.prototype.readJavaScriptMethod = function ( sea ) {
 			'var watch = $INC["watch"],\n' +
 			'scene = $INC["scene"],\n' +
 			'sea3d = $INC["sea3d"],\n' +
-			'print = $INC["print"];\n';
+			'print-c = $INC["print-c"];\n';
 
 		declare +=
 			'var $SRC = $INC["source"],\n' +

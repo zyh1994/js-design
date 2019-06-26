@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <style>
+        .center-in-center {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        table, table tr th, table tr td {
+            border-collapse: collapse;
+            border: 1px solid #0094ff;
+            text-align: center;
+        }
+
+        .input {
+            width: 100%;
+            border: 0px solid #ccc;
+            padding: 7px 0px;
+            text-align: center;
+        }
+        .input2{
+            width:50%;
+            border: 1px solid #ccc;
+            padding: 7px 0px;
+            text-align: center;
+        }
+    </style>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/FileSaver.js"></script>
+    <script language="javascript" src="js/jquery.jqprint-0.3.js"></script>
+</head>
+<body>
+<form id="myform">
+    <table class="center-in-center">
+        <tr>
+            <td>存根编号：</td>
+            <td><input class="input" name="order_no" type="text" value="NO.1" disabled="disabled"></td>
+
+        </tr>
+        <tr>
+            <td>姓名：</td>
+            <td><input  class="input" name="name" type="text" value=""></td>
+
+        </tr>
+        <tr>
+            <td>加班时间：</td>
+            <td><input class="input" name="overtime_time" type="date" value="2018-10-01"></td>
+
+        </tr>
+        <tr>
+            <td>加班事由：</td>
+            <td><input class="input" name="overtime_reason" type="text" value=""></td>
+        </tr>
+        <tr>
+            <td>调休天数：</td>
+            <td><input class="input" name="off_day" type="text" value="半天" disabled="disabled"></td>
+        </tr>
+        <tr>
+            <td colspan="2">---------------------------------------</td>
+
+        </tr>
+
+        <tr>
+            <td>签发人：</td>
+            <td><input class="input" name="signe_people" type="text" value=""></td>
+        </tr>
+        <tr>
+            <td>签发时间：</td>
+            <td><input  class="input" name="signe_time" type="date" value="2018-10-01"></td>
+        </tr>
+        <tr>
+            <td colspan="2">---------------------------------------</td>
+        </tr>
+        <tr>
+            <td>调休事由：</td>
+            <td><input  class="input" name="off_reason" type="text" value=""></td>
+        </tr>
+        <tr>
+            <td>调休日期：</td>
+            <td><input class="input" name="off_date" type="date" value="2018-10-01"></td>
+        </tr>
+        <tr>
+            <td>部门意见：</td>
+            <td><input class="input" name="part_suggestion" type="text" value=""></td>
+        </tr>
+        <tr>
+            <td colspan="2">(本调休单自签发之日起六个月内有效)</td>
+        </tr>
+	<tr>
+		<td>补休天数：</td>
+            <td >
+		<input class="input" type="text" name="size" />
+	</td>
+	</tr>
+        <tr>
+            <td><input class="input" type="button" value="保存" id="save"></td>
+            <td ><input class="input2" type="button" value="打印" id="print"><input class="input2" type="button" value="导出" id="explore"></td>
+        </tr>
+    </table>
+</form>
+</body>
+<script src="js/myIndex.js"></script>
+</html>

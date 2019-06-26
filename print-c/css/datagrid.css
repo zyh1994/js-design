@@ -1,0 +1,25 @@
+﻿.ui-grid
+{
+    position:relative;
+    border:solid 1px #ddd;
+}
+
+.ui-grid-header
+{
+    border-bottom:solid 1px #ddd;
+}
+
+.ui-grid-headercell
+{
+    padding:4px;
+    border-right:solid 1px #ccc;
+    font-weight:bold;
+}
+
+.ui-grid-cell
+{
+    padding:4px;
+    border-right:solid 1px #ccc;
+    border-bottom:solid 1px #ccc;
+}
+

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>three.js webgl - OBJLoader2 basic usage</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <style>
+        body {
+            font-family: Monospace;
+            background-color: #000;
+            color: #fff;
+            margin: 0 0 0 0;
+            padding: 0 0 0 0;
+            border: none;
+            cursor: default;
+        }
+
+        #glFullscreen {
+            width: 100%;
+            height: 100vh;
+            min-width: 640px;
+            min-height: 360px;
+            position: relative;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        #example {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: #000000;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div id="glFullscreen">
+    <canvas id="example"></canvas>
+</div>
+
+<script src="../examples/js/Detector.js"></script>
+<script src="../build/three.js"></script>
+<script src="../examples/js/controls/TrackballControls.js"></script>
+<script src="../examples/js/loaders/MTLLoader.js"></script>
+<script src="../examples/js/libs/dat.gui.min.js"></script>
+
+<script src="../examples/js/loaders/LoaderSupport.js"></script>
+<script src="../examples/js/loaders/OBJLoader2.js"></script>
+<script>
+    'use strict';
+    var MyTest = (function () {
+
+        function MyTest(elementToBindTo) {
+            this.renderer = null;
+            this.canvas = elementToBindTo;
+            this.aspectRatio = 1;
+            this.recalcAspectRatio();
+
+            this.scene = null;
+            this.cameraDefaults = {
+                posCamera: new THREE.Vector3(0.0, 175.0, 500.0),
+                posCameraTarget: new THREE.Vector3(0, 0, 0),
+                near: 0.1,
+                far: 10000,
+                fov: 45
+            };
+            this.camera = null;
+            this.cameraTarget = this.cameraDefaults.posCameraTarget;
+
+            this.controls = null;
+        }
+
+        MyTest.prototype.initGL = function () {
+            this.renderer = new THREE.WebGLRenderer({
+                canvas: this.canvas,
+                antialias: true,
+                autoClear: true
+            });
+            this.renderer.setClearColor(0x050505);
+
+            this.scene = new THREE.Scene();
+
+        }
+        MyTest.prototype.initGL = function () {
+            this.renderer = new THREE.WebGLRenderer({
+                canvas: this.canvas,
+                antialias: true,
+                autoClear: true
+            });
+            this.renderer.setClearColor(0x050505);
+
+            this.scene = new THREE.Scene();
+
+            this.camera = new THREE.PerspectiveCamera(this.cameraDefaults.fov, this.aspectRatio, this.cameraDefaults.near, this.cameraDefaults.far);
+            this.resetCamera();
+            this.controls = new THREE.TrackballControls(this.camera, this.renderer.domElement);
+            var ambientLight = new THREE.AmbientLight(0x404040);
+            var directionalLight1 = new THREE.DirectionalLight(0xC0C090);
+            var directionalLight2 = new THREE.DirectionalLight(0xC0C090);
+
+            directionalLight1.position.set(-100, -50, 100);
+            directionalLight2.position.set(100, 50, -100);
+
+            this.scene.add(directionalLight1);
+            this.scene.add(directionalLight2);
+            this.scene.add(ambientLight);
+
+            var helper = new THREE.GridHelper(1200, 60, 0xFF4444, 0x404040);
+            this.scene.add(helper);
+        };
+
+        MyTest.prototype.resizeDisplayGL = function () {
+            this.controls.handleResize();
+
+            this.recalcAspectRatio();
+            this.renderer.setSize(this.canvas.offsetWidth, this.canvas.offsetHeight, false);
+
+            this.updateCamera();
+        };
+
+        MyTest.prototype.recalcAspectRatio = function () {
+            this.aspectRatio = (this.canvas.offsetHeight === 0) ? 1 : this.canvas.offsetWidth / this.canvas.offsetHeight;
+        };
+
+        MyTest.prototype.resetCamera = function () {
+            this.camera.position.copy(this.cameraDefaults.posCamera);
+            this.cameraTarget.copy(this.cameraDefaults.posCameraTarget);
+
+            this.updateCamera();
+        };
+
+        MyTest.prototype.updateCamera = function () {
+            this.camera.aspect = this.aspectRatio;
+            this.camera.lookAt(this.cameraTarget);
+            this.camera.updateProjectionMatrix();
+        };
+
+        MyTest.prototype.render = function () {
+            if (!this.renderer.autoClear) this.renderer.clear();
+            this.controls.update();
+            this.renderer.render(this.scene, this.camera);
+        };
+        return MyTest;
+    })();
+
+
+    var render = function () {
+        app.render();
+        movez(model);
+        requestAnimationFrame(render);
+    };
+
+    function changed(model, countObj) {
+        model.position.z = (countObj.positionCount.y);
+        model.rotation.y = (countObj.rotationCount.y);
+    }
+
+    // var action = {position: new THREE.Vector3(0, 0, 0), rotation: new THREE.Vector3(0, 0, 0)};
+    var countObj = {
+        positionCount: new THREE.Vector4(0, 0, 1, 200),//原始点，当前点，步长，最大值
+        rotationCount: new THREE.Vector4(0, 0, Math.PI / 36, Math.PI / 2),//原始角度，当前角度，步长，最大值
+        flag: false
+    }
+
+    function changedByTime() {
+        var current_y = countObj.positionCount.y;
+        var length = countObj.positionCount.z;
+        var maxvalue = countObj.positionCount.w;
+
+        var current_angle = countObj.rotationCount.y;
+        var length_angle = countObj.rotationCount.z;
+        var maxvalue_angle = countObj.rotationCount.w;
+
+        if (current_y < maxvalue | countObj.flag) {
+            if (!countObj.flag) {
+                countObj.positionCount.y = current_y + length;
+            } else {
+                countObj.positionCount.z = -length;
+                countObj.positionCount.w = -maxvalue;
+            }
+        } else if (current_y == maxvalue) {
+            if (current_angle == maxvalue_angle) {
+                countObj.flag = true;
+            }
+            if (!countObj.flag) {
+                countObj.rotationCount.y = current_angle + length_angle;
+            } else {
+                countObj.rotationCount.z = -length_angle;
+                countObj.positionCount.w = -maxvalue_angle;
+            }
+
+        }
+    }
+    //
+    function movez(model) {
+        changedByTime();
+        changed(model, countObj);
+    }
+
+
+    var app = new MyTest(document.getElementById('example'));
+    var resizeWindow = function () {
+        app.resizeDisplayGL();
+    };
+
+    window.addEventListener('resize', resizeWindow, false);
+    app.initGL();
+    app.resizeDisplayGL();
+    addControl(app);
+    var model = getModel();
+    customAddModel(app.scene);
+    render();
+
+    function customAddModel(scene) {
+        app.scene.add(model);
+
+    }
+
+    function getModel() {
+        var modelName = 'table';
+        var objLoader = new THREE.OBJLoader2();
+        var callbackOnLoad = function (event) {
+            var mesh = event.detail.loaderRootNode.children[0];
+
+            // mesh.position.x=30;
+            // app.scene.add(mesh);
+
+        };
+        var onLoadMtl = function (materials) {
+            objLoader.setModelName(modelName);
+            objLoader.setMaterials(materials);
+            objLoader.setLogging(true, true);
+            objLoader.load('../examples/models/obj/test/truck.obj', callbackOnLoad, null, null, null, true);
+        };
+        objLoader.loadMtl('../examples/models/obj/test/truck.mtl', null, onLoadMtl);
+        var tableModel = objLoader.loaderRootNode;
+        // tableModel.rotation.x = Math.PI / 2;
+        // tableModel.position.set(20,0,0);
+        return tableModel;
+    }
+
+
+
+    function addControl(app) {
+        var controls = new function () {
+            this.perspective = "Perspective";
+            this.switchCamera = function () {
+                if (app.camera instanceof THREE.PerspectiveCamera) {
+                    app.camera = new THREE.OrthographicCamera(window.innerWidth / -16, window.innerWidth / 16, window.innerHeight / 16, window.innerHeight / -16, -200, 500);
+                    app.camera.position.x = 0;
+                    app.camera.position.y = 180;
+                    app.camera.position.z = 0;
+
+                    app.camera.lookAt(app.scene.position);
+                    this.perspective = "Orthographic";
+                } else {
+                    // app.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+                    app.resetCamera()
+
+                    // app.camera.lookAt(app.scene.position);
+                    this.perspective = "Perspective";
+                }
+            };
+        };
+
+        var gui = new dat.GUI();
+        gui.add(controls, 'switchCamera');
+        gui.add(controls, 'perspective').listen();
+    }
+
+
+    // //判断a,b向量是否平行
+    // function parallel(a,b){
+    //     return(a.x*b.y===a.y*b.x&&
+    //         a.x*b.z===a.z*b.x&&
+    //         a.y*b.z===a.z*b.y);
+    // }
+    //
+    // function simulating_Order(){
+    //     var orderArr=[];
+    //     var order={
+    //         target:new THREE.Vector3(0,0,-200),
+    //         action:{origin:"CW",angle:Math.PI/4}//顺时针，
+    //     };
+    //     var order2={
+    //         target:new THREE.Vector3(100,0,-200),
+    //         action:{origin:"CW",angle:Math.PI/4}//顺时针，
+    //     }
+    //     var order3={
+    //         target:new THREE.Vector3(100,0,0),
+    //         action:{origin:"CW",angle:Math.PI/4}//顺时针，
+    //     }
+    //     var order4={
+    //         target:new THREE.Vector3(0,0,0),
+    //         action:{origin:"CW",angle:Math.PI/4}//顺时针，
+    //     }
+    //     orderArr.push(order);
+    //     orderArr.push(order2);
+    //     orderArr.push(order3);
+    //     orderArr.push(order4);
+    //     return orderArr;
+    // }
+
+    // console.log(parallel({x:0,y:0,z:1},{x:0,y:0,z:-2}));
+</script>
+</body>
+</html>
